@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnland — Master Tech Skills Faster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080B14;
+  --bg2: #0D1120;
+  --card: #111827;
+  --card2: #161D2F;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.12);
+  --primary: #FFFFFF;
+  --muted: rgba(255,255,255,0.5);
+  --muted2: rgba(255,255,255,0.3);
+  --accent: #4F8EF7;
+  --accent2: #7C5CF6;
+  --accent3: #06F7D0;
+  --grad: linear-gradient(135deg, #4F8EF7 0%, #7C5CF6 100%);
+  --grad2: linear-gradient(135deg, #7C5CF6 0%, #06F7D0 100%);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --max: 1160px;
+  --font-head: 'Fraunces', Georgia, serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--primary);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 4px; }
+
+/* ── CONTAINER ── */
+.container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+/* ── UTILITY ── */
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-text2 {
+  background: var(--grad2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; text-decoration: none; font-family: var(--font-body);
+  font-weight: 600; font-size: 0.92rem; border-radius: 50px;
+  padding: 13px 28px; transition: all 0.25s; cursor: pointer; border: none;
+  letter-spacing: 0.01em;
+}
+.btn-primary {
+  background: var(--grad); color: white;
+  box-shadow: 0 4px 24px rgba(79,142,247,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(79,142,247,0.4); }
+.btn-ghost {
+  background: transparent; color: var(--primary);
+  border: 1px solid var(--border2);
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); transform: translateY(-2px); }
+.btn-outline-accent {
+  background: transparent; color: var(--accent);
+  border: 1px solid rgba(79,142,247,0.4);
+}
+.btn-outline-accent:hover { background: rgba(79,142,247,0.1); transform: translateY(-2px); }
+.btn-lg { padding: 16px 36px; font-size: 1rem; }
+.btn-full { width: 100%; justify-content: center; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(8,11,20,0);
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+}
+nav.scrolled {
+  background: rgba(8,11,20,0.88);
+  backdrop-filter: blur(20px);
+  border-color: var(--border);
+}
+.nav-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px;
+}
+.nav-logo {
+  font-family: var(--font-head); font-size: 1.5rem; font-weight: 900;
+  color: white; text-decoration: none; display: flex; align-items: center; gap: 8px;
+  font-style: italic;
+}
+.logo-icon {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--grad); display: flex; align-items: center;
+  justify-content: center; font-size: 1rem; font-style: normal;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 36px; list-style: none;
+}
+.nav-links a {
+  text-decoration: none; color: var(--muted); font-size: 0.88rem;
+  font-weight: 500; transition: color 0.2s;
+}
+.nav-links a:hover { color: white; }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 4px;
+}
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
+.mobile-menu {
+  display: none; flex-direction: column; gap: 0;
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  padding: 0 24px 24px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { text-decoration: none; color: var(--muted); font-size: 0.95rem; font-weight: 500; padding: 14px 0; border-bottom: 1px solid var(--border); transition: color 0.2s; }
+.mobile-menu a:hover { color: white; }
+.mobile-menu a:last-child { border-bottom: none; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 140px 0 100px; position: relative; overflow: hidden;
+}
+.hero-bg-mesh {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.mesh-blob {
+  position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.18;
+}
+.blob1 { width: 600px; height: 600px; background: var(--accent); top: -150px; right: -100px; animation: float1 8s ease-in-out infinite; }
+.blob2 { width: 500px; height: 500px; background: var(--accent2); bottom: -100px; left: -150px; animation: float2 10s ease-in-out infinite; }
+.blob3 { width: 300px; height: 300px; background: var(--accent3); top: 40%; left: 40%; animation: float3 7s ease-in-out infinite; opacity: 0.1; }
+
+@keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-30px,20px) scale(1.05)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(20px,-30px) scale(1.03)} }
+@keyframes float3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,20px)} }
+
+/* Grid of tiny dots */
+.hero-bg-mesh::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(79,142,247,0.12); border: 1px solid rgba(79,142,247,0.3);
+  border-radius: 50px; padding: 7px 18px 7px 10px; margin-bottom: 28px;
+}
+.badge-dot { width: 22px; height: 22px; background: var(--grad); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+.badge-text { font-size: 0.8rem; font-weight: 600; color: var(--accent); }
+.hero h1 {
+  font-family: var(--font-head); font-size: clamp(2.6rem, 4.5vw, 4rem);
+  font-weight: 900; line-height: 1.08; letter-spacing: -1.5px;
+  margin-bottom: 24px; font-style: italic;
+}
+.hero h1 .normal { font-style: normal; }
+.hero p { color: var(--muted); font-size: 1.05rem; max-width: 480px; margin-bottom: 40px; line-height: 1.75; font-weight: 300; }
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.hero-meta { display: flex; align-items: center; gap: 24px; margin-top: 48px; flex-wrap: wrap; }
+.hero-stat strong { display: block; font-family: var(--font-head); font-size: 1.6rem; font-weight: 900; line-height: 1; }
+.hero-stat span { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+.hero-stat-divider { width: 1px; height: 40px; background: var(--border); }
+.avatar-stack { display: flex; align-items: center; gap: 0; }
+.avatar-stack .av { width: 36px; height: 36px; border-radius: 50%; background: var(--grad); border: 2px solid var(--bg); margin-left: -10px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: white; }
+.avatar-stack .av:first-child { margin-left: 0; }
+.av-info { margin-left: 10px; }
+.av-info strong { display: block; font-size: 0.82rem; font-weight: 600; }
+.av-info span { font-size: 0.75rem; color: var(--muted); }
+
+/* Dashboard mockup */
+.hero-visual { position: relative; }
+.dashboard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  position: relative;
+}
+.dash-topbar {
+  background: var(--card2); border-bottom: 1px solid var(--border);
+  padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+}
+.dash-dots span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.dash-dots span:nth-child(1) { background: #FF5F57; }
+.dash-dots span:nth-child(2) { background: #FEBC2E; }
+.dash-dots span:nth-child(3) { background: #28C840; }
+.dash-title { font-size: 0.78rem; color: var(--muted); flex: 1; text-align: center; }
+.dash-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.dash-course-card {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 16px; display: flex; gap: 14px; align-items: center;
+}
+.dash-course-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.dash-course-icon.blue { background: rgba(79,142,247,0.2); }
+.dash-course-icon.violet { background: rgba(124,92,246,0.2); }
+.dash-course-icon.teal { background: rgba(6,247,208,0.2); }
+.dash-course-info { flex: 1; }
+.dash-course-info .label { font-size: 0.72rem; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+.dash-course-info .title { font-size: 0.88rem; font-weight: 600; margin-bottom: 8px; }
+.progress-bar { height: 4px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; }
+.progress-fill.blue { background: var(--accent); }
+.progress-fill.violet { background: var(--accent2); }
+.progress-fill.teal { background: var(--accent3); }
+.dash-pct { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+.dash-stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.dash-stat-mini {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px;
+}
+.dash-stat-mini .num { font-family: var(--font-head); font-size: 1.4rem; font-weight: 900; }
+.dash-stat-mini .lbl { font-size: 0.72rem; color: var(--muted); }
+.floating-badge {
+  position: absolute; background: var(--card2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4); font-size: 0.82rem; font-weight: 600;
+  animation: float-badge 3s ease-in-out infinite;
+}
+@keyframes float-badge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+.floating-badge.top-right { top: -20px; right: -30px; }
+.floating-badge.bot-left { bottom: -16px; left: -30px; animation-delay: 1.5s; }
+.fb-icon { width: 32px; height: 32px; border-radius: 10px; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+/* ── MARQUEE ── */
+.marquee-section { padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
+.marquee-track { display: flex; gap: 48px; animation: marquee 28s linear infinite; width: max-content; }
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.marquee-item {
+  display: flex; align-items: center; gap: 10px; white-space: nowrap;
+  font-size: 0.82rem; font-weight: 600; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.marquee-item .dot { width: 5px; height: 5px; background: var(--accent2); border-radius: 50%; }
+.marquee-label { padding: 12px 0; font-size: 0.78rem; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; margin-bottom: 16px; }
+
+/* ── TESTIMONIALS ── */
+.test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.test-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px; position: relative;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.test-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+.test-quote { font-size: 2.5rem; line-height: 1; color: var(--accent); font-family: var(--font-head); margin-bottom: 16px; }
+.test-text { font-size: 0.95rem; color: rgba(255,255,255,0.75); line-height: 1.75; margin-bottom: 24px; font-weight: 300; }
+.test-author { display: flex; align-items: center; gap: 12px; }
+.test-av {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem; color: white;
+}
+.test-av.a { background: linear-gradient(135deg, #4F8EF7, #7C5CF6); }
+.test-av.b { background: linear-gradient(135deg, #7C5CF6, #06F7D0); }
+.test-av.c { background: linear-gradient(135deg, #06F7D0, #4F8EF7); }
+.test-av.d { background: linear-gradient(135deg, #F7774F, #F74F8E); }
+.test-info strong { display: block; font-size: 0.88rem; font-weight: 600; }
+.test-info span { font-size: 0.78rem; color: var(--muted); }
+.stars { color: #F7C948; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 12px; }
+
+/* ── SECTION COMMON ── */
+section { padding: 110px 0; }
+.section-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(124,92,246,0.15); border: 1px solid rgba(124,92,246,0.3);
+  border-radius: 50px; padding: 5px 16px; font-size: 0.75rem;
+  font-weight: 700; color: var(--accent2); letter-spacing: 0.07em;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-head); font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 900; letter-spacing: -0.5px; line-height: 1.12;
+  margin-bottom: 16px;
+}
+.section-sub { color: var(--muted); font-size: 1rem; max-width: 560px; line-height: 1.75; font-weight: 300; }
+.section-header { margin-bottom: 64px; }
+.section-header.centered { text-align: center; }
+.section-header.centered .section-sub { margin: 0 auto; }
+
+/* ── COMPARISON ── */
+.comparison-wrap {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 28px; padding: 64px; overflow: hidden; position: relative;
+}
+.comparison-wrap::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at top right, rgba(79,142,247,0.06), transparent 60%);
+  pointer-events: none;
+}
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+.comp-card { border-radius: 20px; padding: 36px; }
+.comp-old { background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+.comp-new { background: var(--grad); position: relative; overflow: hidden; }
+.comp-new::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent); }
+.comp-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+.comp-label { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.comp-old .comp-label { color: var(--muted); }
+.comp-new .comp-label { color: rgba(255,255,255,0.9); }
+.comp-badge { border-radius: 50px; padding: 4px 12px; font-size: 0.7rem; font-weight: 700; }
+.comp-old .comp-badge { background: rgba(255,255,255,0.06); color: var(--muted); }
+.comp-new .comp-badge { background: rgba(255,255,255,0.2); color: white; }
+.comp-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; font-size: 0.92rem; }
+.ci-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; flex-shrink: 0; margin-top: 2px; }
+.comp-old .ci-icon { background: rgba(255,255,255,0.06); color: var(--muted); }
+.comp-old .comp-item span { color: var(--muted); }
+.comp-new .ci-icon { background: rgba(255,255,255,0.2); color: white; }
+.comp-new .comp-item span { color: white; }
+
+/* ── BENEFITS ── */
+.benefits-bg { background: var(--bg2); }
+.benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.benefit-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 36px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  position: relative; overflow: hidden;
+}
+.benefit-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--grad); opacity: 0; transition: opacity 0.3s;
+}
+.benefit-card:hover { transform: translateY(-4px); border-color: var(--border2); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.benefit-card:hover::before { opacity: 1; }
+.benefit-icon {
+  width: 54px; height: 54px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; margin-bottom: 22px;
+}
+.benefit-icon.bi1 { background: rgba(79,142,247,0.15); }
+.benefit-icon.bi2 { background: rgba(124,92,246,0.15); }
+.benefit-icon.bi3 { background: rgba(6,247,208,0.12); }
+.benefit-icon.bi4 { background: rgba(247,199,72,0.12); }
+.benefit-icon.bi5 { background: rgba(247,119,79,0.12); }
+.benefit-icon.bi6 { background: rgba(247,79,142,0.12); }
+.benefit-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+.benefit-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* ── HOW IT WORKS ── */
+.steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+.steps-row::before {
+  content: ''; position: absolute; top: 28px; left: calc(16.67% + 14px); right: calc(16.67% + 14px);
+  height: 1px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+  opacity: 0.4;
+}
+.step-card { text-align: center; padding: 0 28px; }
+.step-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--grad); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 1.2rem; font-weight: 900;
+  margin: 0 auto 28px; position: relative; z-index: 1;
+  box-shadow: 0 8px 28px rgba(79,142,247,0.3);
+}
+.step-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+.step-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* ── DEMO ── */
+.demo-box {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 24px; aspect-ratio: 16/7; display: flex; align-items: center;
+  justify-content: center; position: relative; overflow: hidden; margin-bottom: 48px;
+}
+.demo-box::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at center, rgba(79,142,247,0.08) 0%, transparent 70%);
+}
+.demo-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; position: relative; z-index: 1; }
+.demo-play-btn {
+  width: 76px; height: 76px; border-radius: 50%;
+  background: var(--grad); display: flex; align-items: center;
+  justify-content: center; cursor: pointer; transition: transform 0.25s;
+  box-shadow: 0 10px 40px rgba(79,142,247,0.4);
+}
+.demo-play-btn:hover { transform: scale(1.08); }
+.demo-caption { font-size: 0.88rem; color: var(--muted); }
+.demo-pills { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.demo-pill {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 50px; padding: 8px 18px; font-size: 0.8rem; color: var(--muted);
+  display: flex; align-items: center; gap: 8px;
+}
+.demo-pill span { color: var(--accent3); font-size: 0.7rem; }
+.demo-bullets-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.db { display: flex; gap: 16px; align-items: flex-start; }
+.db-icon {
+  width: 44px; height: 44px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.db-icon.v1 { background: rgba(79,142,247,0.15); }
+.db-icon.v2 { background: rgba(124,92,246,0.15); }
+.db-icon.v3 { background: rgba(6,247,208,0.1); }
+.db h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; }
+.db p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+/* ── PRICING ── */
+.pricing-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.price-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 40px 32px; display: flex; flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.price-card:hover { border-color: var(--border2); }
+.price-card.featured {
+  background: var(--bg); border: 1px solid rgba(79,142,247,0.4);
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 60px rgba(79,142,247,0.12), 0 30px 80px rgba(0,0,0,0.4);
+  transform: scale(1.03);
+}
+.price-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+.price-card.featured::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad);
+}
+.popular-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(79,142,247,0.15); border: 1px solid rgba(79,142,247,0.3);
+  border-radius: 50px; padding: 5px 14px; font-size: 0.72rem; font-weight: 700;
+  color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 24px; align-self: flex-start;
+}
+.tier-name { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.price-amount { display: flex; align-items: flex-end; gap: 4px; margin-bottom: 6px; }
+.price-num { font-family: var(--font-head); font-size: 3.2rem; font-weight: 900; line-height: 1; }
+.price-per { font-size: 0.88rem; color: var(--muted); padding-bottom: 8px; }
+.price-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 28px; line-height: 1.6; font-weight: 300; }
+.price-div { height: 1px; background: var(--border); margin: 24px 0; }
+.price-feats { list-style: none; flex: 1; }
+.price-feats li { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-bottom: 13px; }
+.check { font-size: 0.75rem; }
+.chk-blue { color: var(--accent); }
+.chk-violet { color: var(--accent2); }
+.chk-teal { color: var(--accent3); }
+.price-cta { margin-top: 32px; }
+
+/* ── FAQ ── */
+.faq-wrap { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+  padding: 22px 0; display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: white; gap: 24px;
+}
+.faq-q .fi { font-size: 1.2rem; color: var(--muted); transition: transform 0.25s, color 0.25s; flex-shrink: 0; }
+.faq-q.open .fi { transform: rotate(45deg); color: var(--accent); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.faq-a p { color: var(--muted); font-size: 0.93rem; line-height: 1.8; padding-bottom: 22px; font-weight: 300; }
+
+/* ── FINAL CTA ── */
+.cta-section {
+  padding: 120px 0; position: relative; overflow: hidden;
+  background: var(--card2); border-top: 1px solid var(--border);
+}
+.cta-section::before {
+  content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cta-section::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.cta-inner { text-align: center; position: relative; z-index: 1; }
+.cta-inner h2 { font-family: var(--font-head); font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 900; margin-bottom: 16px; line-height: 1.1; }
+.cta-inner p { color: var(--muted); font-size: 1.05rem; margin-bottom: 40px; font-weight: 300; }
+.cta-btn-wrap { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-trust { margin-top: 24px; font-size: 0.8rem; color: var(--muted2); }
+.cta-trust span { color: var(--accent3); }
+
+/* ── FOOTER ── */
+footer { padding: 60px 0 32px; border-top: 1px solid var(--border); }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand p { font-size: 0.88rem; color: var(--muted); margin-top: 14px; max-width: 260px; line-height: 1.7; font-weight: 300; }
+.footer-col h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted2); margin-bottom: 16px; }
+.footer-col a { display: block; text-decoration: none; color: var(--muted); font-size: 0.88rem; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: white; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 28px; }
+.copyright { font-size: 0.82rem; color: var(--muted2); }
+.social-row { display: flex; gap: 10px; }
+.soc {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--card); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 700;
+  transition: all 0.2s;
+}
+.soc:hover { background: var(--grad); border-color: transparent; color: white; }
+
+/* ── ANIMATIONS ── */
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.in { opacity: 1; transform: none; }
+.fade-up:nth-child(2) { transition-delay: 0.1s; }
+.fade-up:nth-child(3) { transition-delay: 0.2s; }
+.fade-up:nth-child(4) { transition-delay: 0.3s; }
+.fade-up:nth-child(5) { transition-delay: 0.4s; }
+.fade-up:nth-child(6) { transition-delay: 0.5s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .floating-badge { display: none; }
+  .test-grid { grid-template-columns: 1fr; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr 1fr; }
+  .steps-row { grid-template-columns: 1fr; gap: 40px; }
+  .steps-row::before { display: none; }
+  .demo-bullets-grid { grid-template-columns: 1fr; }
+  .pricing-wrap { grid-template-columns: 1fr; }
+  .price-card.featured { transform: none; }
+  .price-card.featured:hover { transform: translateY(-4px); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .nav-links, .nav-right .btn-ghost { display: none; }
+  .nav-hamburger { display: flex; }
+  .comparison-wrap { padding: 40px 28px; }
+  .hero h1 { font-size: 2.6rem; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 120px 0 80px; }
+  .hero-meta { gap: 16px; }
+  .hero-stat-divider { height: 30px; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  section { padding: 80px 0; }
+  .comp-grid { gap: 16px; }
+  .comp-card { padding: 28px; }
+  .hero-ctas { flex-direction: column; width: 100%; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .demo-pills { gap: 8px; }
+  .cta-btn-wrap { flex-direction: column; align-items: center; }
+  .cta-btn-wrap .btn { width: 100%; max-width: 340px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">🚀</div>
+      Learnland
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#" class="btn btn-ghost" style="padding:10px 22px;font-size:0.85rem;">Log In</a>
+      <a href="#" class="btn btn-primary" style="padding:10px 22px;font-size:0.85rem;">Start Free →</a>
+    </div>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Features</a>
+    <a href="#how">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="#" style="color:var(--accent);border-bottom:none;margin-top:8px;">Start Free →</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg-mesh">
+    <div class="mesh-blob blob1"></div>
+    <div class="mesh-blob blob2"></div>
+    <div class="mesh-blob blob3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <div class="badge-dot">✦</div>
+          <span class="badge-text">Trusted by 85,000+ developers worldwide</span>
+        </div>
+        <h1>
+          Master <span class="grad-text">Tech Skills</span><br>
+          <span class="normal">Without the</span> <span class="grad-text2">Overwhelm</span>
+        </h1>
+        <p>Learnland is the adaptive learning platform built for engineers, designers, and product teams. Go from beginner to job-ready with structured paths, real projects, and AI-powered mentorship.</p>
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-primary btn-lg">Start Learning Free →</a>
+          <a href="#" class="btn btn-ghost btn-lg">Watch Demo</a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-stat">
+            <strong class="grad-text">85K+</strong>
+            <span>Active learners</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <strong class="grad-text">500+</strong>
+            <span>Courses & paths</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div>
+            <div class="avatar-stack">
+              <div class="av">AK</div>
+              <div class="av">SR</div>
+              <div class="av">MJ</div>
+              <div class="av">+</div>
+            </div>
+          </div>
+          <div class="av-info">
+            <strong>4.9 / 5.0</strong>
+            <span>Avg. learner rating</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="dashboard fade-up">
+          <div class="dash-topbar">
+            <div class="dash-dots"><span></span><span></span><span></span></div>
+            <div class="dash-title">Learnland Dashboard</div>
+          </div>
+          <div class="dash-body">
+            <div class="dash-course-card">
+              <div class="dash-course-icon blue">⚛️</div>
+              <div class="dash-course-info">
+                <div class="label">In Progress</div>
+                <div class="title">React & Next.js Mastery</div>
+                <div class="progress-bar"><div class="progress-fill blue" style="width:72%"></div></div>
+                <div class="dash-pct">72% complete · Est. 3 days left</div>
+              </div>
+            </div>
+            <div class="dash-course-card">
+              <div class="dash-course-icon violet">🐍</div>
+              <div class="dash-course-info">
+                <div class="label">In Progress</div>
+                <div class="title">Python for Data Science</div>
+                <div class="progress-bar"><div class="progress-fill violet" style="width:45%"></div></div>
+                <div class="dash-pct">45% complete · Est. 1 week left</div>
+              </div>
+            </div>
+            <div class="dash-course-card">
+              <div class="dash-course-icon teal">☁️</div>
+              <div class="dash-course-info">
+                <div class="label">Up Next</div>
+                <div class="title">AWS Cloud Architecture</div>
+                <div class="progress-bar"><div class="progress-fill teal" style="width:10%"></div></div>
+                <div class="dash-pct">10% complete · Just started</div>
+              </div>
+            </div>
+            <div class="dash-stats-row">
+              <div class="dash-stat-mini">
+                <div class="num grad-text">14</div>
+                <div class="lbl">Day streak 🔥</div>
+              </div>
+              <div class="dash-stat-mini">
+                <div class="num grad-text2">3</div>
+                <div class="lbl">Certs earned 🎓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-badge top-right">
+          <div class="fb-icon">🎯</div>
+          <div>
+            <div style="font-size:0.72rem;color:var(--muted);margin-bottom:2px">AI Mentor says</div>
+            <div>Great progress! Keep going 🚀</div>
+          </div>
+        </div>
+        <div class="floating-badge bot-left">
+          <div class="fb-icon">✅</div>
+          <div>
+            <div style="font-size:0.72rem;color:var(--muted);margin-bottom:2px">Certificate unlocked</div>
+            <div>React Developer · Level 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-section">
+  <div class="marquee-label">Graduates hired at</div>
+  <div class="marquee-track">
+    <div class="marquee-item"><div class="dot"></div> Google</div>
+    <div class="marquee-item"><div class="dot"></div> Meta</div>
+    <div class="marquee-item"><div class="dot"></div> Stripe</div>
+    <div class="marquee-item"><div class="dot"></div> Shopify</div>
+    <div class="marquee-item"><div class="dot"></div> Notion</div>
+    <div class="marquee-item"><div class="dot"></div> Vercel</div>
+    <div class="marquee-item"><div class="dot"></div> Figma</div>
+    <div class="marquee-item"><div class="dot"></div> Atlassian</div>
+    <div class="marquee-item"><div class="dot"></div> Airbnb</div>
+    <div class="marquee-item"><div class="dot"></div> Netflix</div>
+    <!-- duplicate -->
+    <div class="marquee-item"><div class="dot"></div> Google</div>
+    <div class="marquee-item"><div class="dot"></div> Meta</div>
+    <div class="marquee-item"><div class="dot"></div> Stripe</div>
+    <div class="marquee-item"><div class="dot"></div> Shopify</div>
+    <div class="marquee-item"><div class="dot"></div> Notion</div>
+    <div class="marquee-item"><div class="dot"></div> Vercel</div>
+    <div class="marquee-item"><div class="dot"></div> Figma</div>
+    <div class="marquee-item"><div class="dot"></div> Atlassian</div>
+    <div class="marquee-item"><div class="dot"></div> Airbnb</div>
+    <div class="marquee-item"><div class="dot"></div> Netflix</div>
+  </div>
+</div>
+
+<!-- ══ SOCIAL PROOF ══ -->
+<section>
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">Learner Love</div>
+      <h2 class="section-title">Real developers.<br>Real career wins.</h2>
+      <p class="section-sub">Don't take our word for it — here's what our community has to say after completing their learning paths.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card fade-up">
+        <div class="stars">★★★★★</div>
+        <div class="test-quote">"</div>
+        <p class="test-text">I went from knowing zero code to landing a full-stack engineer role at a Series B startup — in just 8 months. The structured paths and project-based learning on Learnland were genuinely the difference-maker.</p>
+        <div class="test-author">
+          <div class="test-av a">AK</div>
+          <div class="test-info"><strong>Aisha Khan</strong><span>Full-Stack Engineer, FinTech Startup</span></div>
+        </div>
+      </div>
+      <div class="test-card fade-up">
+        <div class="stars">★★★★★</div>
+        <div class="test-quote">"</div>
+        <p class="test-text">The AI-powered mentorship is unlike anything else I've tried. It catches my weak spots, adjusts the curriculum, and keeps me accountable. I've completed more courses here than everywhere else combined.</p>
+        <div class="test-author">
+          <div class="test-av b">SR</div>
+          <div class="test-info"><strong>Sam Rodriguez</strong><span>Data Scientist, Remote</span></div>
+        </div>
+      </div>
+      <div class="test-card fade-up">
+        <div class="stars">★★★★★</div>
+        <div class="test-quote">"</div>
+        <p class="test-text">As a team lead, I've put 6 of my engineers through Learnland's cloud and DevOps tracks. The ROI on productivity has been measurable within the first month. It's become part of our onboarding.</p>
+        <div class="test-author">
+          <div class="test-av c">MJ</div>
+          <div class="test-info"><strong>Marcus J.</strong><span>Engineering Manager, SaaS Co.</span></div>
+        </div>
+      </div>
+      <div class="test-card fade-up">
+        <div class="stars">★★★★★</div>
+        <div class="test-quote">"</div>
+        <p class="test-text">The certificate system is taken seriously by employers. I put my Learnland React cert on my portfolio and got callbacks from three companies within two weeks. The projects are real, not toy examples.</p>
+        <div class="test-author">
+          <div class="test-av d">TL</div>
+          <div class="test-info"><strong>Tina Li</strong><span>Frontend Developer, Remote-first</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROBLEM → SOLUTION ══ -->
+<section>
+  <div class="container">
+    <div class="comparison-wrap">
+      <div class="section-header fade-up">
+        <div class="section-tag">The Problem</div>
+        <h2 class="section-title">There's a smarter<br>way to learn tech.</h2>
+        <p class="section-sub">Most learning platforms leave you drowning in content with no clear path. Learnland is built differently.</p>
+      </div>
+      <div class="comp-grid">
+        <div class="comp-card comp-old">
+          <div class="comp-card-head">
+            <div class="comp-label">The Old Way</div>
+            <div class="comp-badge">Outdated</div>
+          </div>
+          <div class="comp-item"><div class="ci-icon">✕</div><span>Hundreds of random tutorials with no learning structure or progression</span></div>
+          <div class="comp-item"><div class="ci-icon">✕</div><span>Passive video watching — no real coding, no actual projects, no real skills</span></div>
+          <div class="comp-item"><div class="ci-icon">✕</div><span>One-size-fits-all curriculum that ignores your background and pace</span></div>
+          <div class="comp-item"><div class="ci-icon">✕</div><span>Certificates nobody recognizes, disconnected from what employers actually want</span></div>
+          <div class="comp-item"><div class="ci-icon">✕</div><span>No mentorship, no feedback, just you and a video player — alone</span></div>
+        </div>
+        <div class="comp-card comp-new">
+          <div class="comp-card-head">
+            <div class="comp-label">With Learnland</div>
+            <div class="comp-badge">Built for 2025</div>
+          </div>
+          <div class="comp-item"><div class="ci-icon">✓</div><span>Curated learning paths designed by ex-Google, Meta, and Stripe engineers</span></div>
+          <div class="comp-item"><div class="ci-icon">✓</div><span>Hands-on projects you can ship and add directly to your portfolio</span></div>
+          <div class="comp-item"><div class="ci-icon">✓</div><span>AI adapts your curriculum in real-time based on how you learn and what you need</span></div>
+          <div class="comp-item"><div class="ci-icon">✓</div><span>Industry-recognized certificates validated by 500+ hiring companies</span></div>
+          <div class="comp-item"><div class="ci-icon">✓</div><span>Live mentor sessions, peer code reviews, and a 40,000-strong community</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BENEFITS ══ -->
+<section id="features" class="benefits-bg">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">Features</div>
+      <h2 class="section-title">Why engineers choose<br>Learnland</h2>
+      <p class="section-sub">Every feature was built to close the gap between learning and actually getting hired.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon bi1">🗺️</div>
+        <h3>Structured Learning Paths</h3>
+        <p>From zero to job-ready with role-based tracks: Frontend, Backend, ML Engineer, DevOps, Mobile, and more. No more guessing what to learn next.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon bi2">🤖</div>
+        <h3>AI-Powered Mentorship</h3>
+        <p>Your personal AI tutor reviews your code, explains concepts at your level, spots gaps in your knowledge, and adjusts your path — all in real time, 24/7.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon bi3">⚡</div>
+        <h3>Browser-Based IDE</h3>
+        <p>Write, run, and debug code directly in your browser. No setup, no installs. Full VS Code-like experience across 20+ languages and frameworks.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon bi4">🏆</div>
+        <h3>Industry Certificates</h3>
+        <p>Earn verifiable credentials backed by real companies. Each certificate is tied to a portfolio project — not just a quiz. 500+ hiring partners recognize them.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon bi5">👥</div>
+        <h3>Live Cohorts & Peer Review</h3>
+        <p>Join weekly live sessions with instructors, submit code for peer review, and work on team projects that simulate real engineering environments.</p>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon bi6">📊</div>
+        <h3>Progress Analytics</h3>
+        <p>Detailed skill graphs, streak tracking, completion forecasts, and weekly reports so you always know exactly where you stand and what to focus on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">Process</div>
+      <h2 class="section-title">From signup to hired<br>in three steps.</h2>
+      <p class="section-sub">We've stripped away every obstacle between you and your next career milestone.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step-card fade-up">
+        <div class="step-num">1</div>
+        <h3>Pick Your Learning Path</h3>
+        <p>Take a 5-minute skills assessment and tell us your goal — new job, promotion, or side project. Learnland maps the exact path to get you there, customized to your current level.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">2</div>
+        <h3>Learn by Building</h3>
+        <p>Follow structured modules with video explanations, interactive coding challenges, and capstone projects. Your AI mentor reviews your code and keeps you on track every step of the way.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">3</div>
+        <h3>Get Hired & Get Promoted</h3>
+        <p>Complete your path, earn your certificate, and activate career mode — access resume reviews, mock interviews, and direct referrals to 500+ hiring companies in our network.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEMO ══ -->
+<section style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">See It Live</div>
+      <h2 class="section-title">Watch Learnland<br>in action</h2>
+    </div>
+    <div class="demo-box">
+      <div class="demo-inner">
+        <div class="demo-play-btn">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div class="demo-caption">Product walkthrough · 2 min · No account needed</div>
+      </div>
+    </div>
+    <div class="demo-pills" style="margin-bottom:48px">
+      <div class="demo-pill"><span>●</span> Adaptive learning engine</div>
+      <div class="demo-pill"><span>●</span> Browser IDE in action</div>
+      <div class="demo-pill"><span>●</span> AI code review demo</div>
+      <div class="demo-pill"><span>●</span> Certificate workflow</div>
+    </div>
+    <div class="demo-bullets-grid">
+      <div class="db fade-up">
+        <div class="db-icon v1">🎯</div>
+        <div>
+          <h4>What Learnland Does</h4>
+          <p>Combines structured curriculum, a live coding environment, and AI mentorship into one cohesive platform — so learners actually finish what they start.</p>
+        </div>
+      </div>
+      <div class="db fade-up">
+        <div class="db-icon v2">🧑‍💻</div>
+        <div>
+          <h4>Who It's Built For</h4>
+          <p>Career switchers entering tech, working developers levelling up, and engineering teams standardizing skills. From 18-year-old beginners to 40-year-old senior devs.</p>
+        </div>
+      </div>
+      <div class="db fade-up">
+        <div class="db-icon v3">✨</div>
+        <div>
+          <h4>What Makes It Different</h4>
+          <p>Unlike Udemy or Coursera, Learnland's AI adapts your path in real time. Unlike bootcamps, it costs 95% less and fits around your schedule — fully self-paced.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">Pricing</div>
+      <h2 class="section-title">Invest in your career.<br>Not your confusion.</h2>
+      <p class="section-sub">All plans include a 14-day free trial. No credit card required.</p>
+    </div>
+    <div class="pricing-wrap">
+      <!-- Starter -->
+      <div class="price-card fade-up">
+        <p class="tier-name">Starter</p>
+        <div class="price-amount">
+          <span class="price-num">$0</span>
+          <span class="price-per">/month</span>
+        </div>
+        <p class="price-desc">For curious beginners who want to explore before committing. No time limit, no credit card.</p>
+        <div class="price-div"></div>
+        <ul class="price-feats">
+          <li><span class="check chk-blue">✓</span> 3 free learning paths</li>
+          <li><span class="check chk-blue">✓</span> Browser-based code editor</li>
+          <li><span class="check chk-blue">✓</span> 50 coding exercises/month</li>
+          <li><span class="check chk-blue">✓</span> Community forum access</li>
+          <li><span class="check chk-blue">✓</span> Progress tracking</li>
+        </ul>
+        <div class="price-cta">
+          <a href="#" class="btn btn-ghost btn-full">Get Started Free</a>
+        </div>
+      </div>
+      <!-- Pro -->
+      <div class="price-card featured fade-up">
+        <div class="popular-badge">⚡ Most Popular</div>
+        <p class="tier-name">Pro</p>
+        <div class="price-amount">
+          <span class="price-num">$29</span>
+          <span class="price-per">/month</span>
+        </div>
+        <p class="price-desc">The full Learnland experience for serious learners ready to land their next role.</p>
+        <div class="price-div"></div>
+        <ul class="price-feats">
+          <li><span class="check chk-blue">✓</span> All 500+ courses & paths</li>
+          <li><span class="check chk-blue">✓</span> Unlimited coding exercises</li>
+          <li><span class="check chk-blue">✓</span> AI mentor & code review</li>
+          <li><span class="check chk-blue">✓</span> Industry certificates (portfolio-ready)</li>
+          <li><span class="check chk-blue">✓</span> Live weekly cohort sessions</li>
+          <li><span class="check chk-blue">✓</span> Career support & referrals</li>
+          <li><span class="check chk-blue">✓</span> Offline downloads</li>
+        </ul>
+        <div class="price-cta">
+          <a href="#" class="btn btn-primary btn-full">Start 14-Day Free Trial →</a>
+        </div>
+      </div>
+      <!-- Teams -->
+      <div class="price-card fade-up">
+        <p class="tier-name">Teams</p>
+        <div class="price-amount">
+          <span class="price-num">$19</span>
+          <span class="price-per">/seat/mo</span>
+        </div>
+        <p class="price-desc">For engineering managers who want to upskill their entire team with measurable outcomes.</p>
+        <div class="price-div"></div>
+        <ul class="price-feats">
+          <li><span class="check chk-violet">✓</span> Everything in Pro</li>
+          <li><span class="check chk-violet">✓</span> Admin dashboard & analytics</li>
+          <li><span class="check chk-violet">✓</span> Custom learning paths</li>
+          <li><span class="check chk-violet">✓</span> SSO & SAML integration</li>
+          <li><span class="check chk-violet">✓</span> Dedicated Customer Success</li>
+          <li><span class="check chk-violet">✓</span> SLA & priority support</li>
+        </ul>
+        <div class="price-cta">
+          <a href="#" class="btn btn-outline-accent btn-full">Talk to Sales</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-header centered fade-up">
+      <div class="section-tag">FAQ</div>
+      <h2 class="section-title">Questions we get<br>all the time.</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Is Learnland right for complete beginners? <span class="fi">+</span></button>
+        <div class="faq-a"><p>Absolutely. Learnland's skills assessment places you at the right starting point regardless of your background. We have learners ranging from people who've never written a line of code to senior engineers brushing up on emerging technologies. The AI adapts the curriculum to your level from day one.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">How long does it take to get job-ready? <span class="fi">+</span></button>
+        <div class="faq-a"><p>Most learners on our Full-Stack or Frontend paths land interviews within 6–12 months, studying 1–2 hours per day. Learners who already have some coding experience often complete paths in 3–6 months. Your dashboard shows an estimated completion date based on your current pace.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Do companies actually recognize Learnland certificates? <span class="fi">+</span></button>
+        <div class="faq-a"><p>Yes. We have 500+ hiring partner companies who explicitly accept Learnland certificates as a signal of job-readiness. Each certificate links to your portfolio project, giving employers concrete evidence of your skills — not just a completion badge.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">What's included in the AI mentorship? <span class="fi">+</span></button>
+        <div class="faq-a"><p>The AI tutor reviews every piece of code you write, explains bugs and best practices in plain English, answers conceptual questions 24/7, adapts your difficulty curve based on your progress, and sends weekly reports highlighting your strongest and weakest areas. It's like having a senior developer on-call at all times.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">Can I cancel or pause my subscription? <span class="fi">+</span></button>
+        <div class="faq-a"><p>Yes to both. Cancel anytime from your account settings — no calls, no email, 30 seconds. We also offer a Pause feature so you can freeze billing for up to 3 months if life gets busy, without losing any of your progress or certificates.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">What if I don't get results? <span class="fi">+</span></button>
+        <div class="faq-a"><p>We offer a 30-day money-back guarantee with zero questions asked. On the Pro plan, we also have a job guarantee pilot for eligible learners: if you complete your path and don't receive a job offer within 6 months, we refund your full year's subscription. We win when you win.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="section-tag" style="margin:0 auto 20px">🚀 Start Today</div>
+      <h2>Ready to land your<br><span class="grad-text">dream tech job?</span></h2>
+      <p>Join 85,000+ engineers and developers already learning on Learnland.<br>Your first course is free — no credit card required.</p>
+      <div class="cta-btn-wrap">
+        <a href="#" class="btn btn-primary btn-lg">Start Learning Free →</a>
+        <a href="#" class="btn btn-ghost btn-lg">Book a Team Demo</a>
+      </div>
+      <p class="cta-trust"><span>✓</span> Free forever plan &nbsp;&nbsp;<span>✓</span> 14-day Pro trial &nbsp;&nbsp;<span>✓</span> Cancel anytime &nbsp;&nbsp;<span>✓</span> No credit card needed</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="margin-bottom:0">
+          <div class="logo-icon">🚀</div> Learnland
+        </a>
+        <p>The adaptive tech learning platform built to take you from curious beginner to hired engineer. Fast, flexible, and actually effective.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#">Learning Paths</a>
+        <a href="#">AI Mentor</a>
+        <a href="#">Certificates</a>
+        <a href="#">Browser IDE</a>
+        <a href="#">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Kit</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a>
+        <a href="#">Community</a>
+        <a href="#">Help Center</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 Learnland Technologies Inc. All rights reserved. · hello@learnland.io</p>
+      <div class="social-row">
+        <a href="#" class="soc">𝕏</a>
+        <a href="#" class="soc">in</a>
+        <a href="#" class="soc">gh</a>
+        <a href="#" class="soc">yt</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Close mobile menu on link click
+document.querySelectorAll('#mobileMenu a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+});
+
+// Scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// FAQ accordion
+function toggleFAQ(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q => {
+    q.classList.remove('open');
+    q.nextElementSibling.style.maxHeight = null;
+  });
+  if (!isOpen) {
+    btn.classList.add('open');
+    ans.style.maxHeight = ans.scrollHeight + 'px';
+  }
+}
+</script>
+</body>
+</html>
